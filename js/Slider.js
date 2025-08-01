@@ -210,6 +210,30 @@ app.registerExtension(
                 nodeType.prototype.onNodeCreated = function () {
                     if (onNodeCreated) onNodeCreated.apply(this, []);
                     this.mxSlider = new MXSlider(this);
+                    this.properties.max = 10;
+                    this.onPropertyChanged("max");
+                    this.properties.value = 5.0;
+                    this.onPropertyChanged("value");
+                    this.properties.step = 0.1;
+                    this.onPropertyChanged("step");
+                    this.properties.decimals = 2;
+                    this.onPropertyChanged("decimals");
+                }
+            }
+    }
+});
+
+app.registerExtension(
+{
+    name: "mxSliderFloatSmall",
+    async beforeRegisterNodeDef(nodeType, nodeData, _app)
+    {
+        if (nodeData.name === "mxSliderFloatSmall")
+            {
+                const onNodeCreated = nodeType.prototype.onNodeCreated;
+                nodeType.prototype.onNodeCreated = function () {
+                    if (onNodeCreated) onNodeCreated.apply(this, []);
+                    this.mxSlider = new MXSlider(this);
                     this.properties.max = 1;
                     this.onPropertyChanged("max");
                     this.properties.value = 0.5;
@@ -222,3 +246,4 @@ app.registerExtension(
             }
     }
 });
+

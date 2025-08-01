@@ -121,6 +121,30 @@ class mxSliderFloat:
             out = Xi
         return (out,)
 
+class mxSliderFloatSmall:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "Xi": ("INT", {"default": 20, "min": -4294967296, "max": 4294967296}),
+                "Xf": ("FLOAT", {"default": 20, "min": -4294967296, "max": 4294967296}),
+                "isfloatX": ("INT", {"default": 0, "min": 0, "max": 1}),
+            },
+        }
+    
+    RETURN_TYPES = (any,)
+    RETURN_NAMES = ("X",)
+    
+    FUNCTION = "main"
+    CATEGORY = 'utils/mxToolkit'
+    
+    def main(self, Xi, Xf, isfloatX):
+        if isfloatX > 0:
+            out = Xf
+        else:
+            out = Xi
+        return (out,)
+
 class mxSlider2D:
     @classmethod
     def INPUT_TYPES(s):
@@ -190,6 +214,7 @@ NODE_CLASS_MAPPINGS = {
     "mxSlider": mxSlider,
     "mxSliderSmall": mxSliderSmall,
     "mxSliderFloat": mxSliderFloat,
+    "mxSliderFloatSmall": mxSliderFloatSmall,
     "mxSlider2D": mxSlider2D,
     "mxSlider2DA": mxSlider2DA,
 }
@@ -197,9 +222,10 @@ NODE_CLASS_MAPPINGS = {
 NODE_DISPLAY_NAME_MAPPINGS = {
     "mxSeed": "Seed",
     "mxStop": "Stop",
-    "mxSlider": "Slider",
-    "mxSliderSmall": "Slider (Small)",
-    "mxSliderFloat": "Slider (Float)",
-    "mxSlider2D": "Slider 2D",
-    "mxSlider2DA": "Slider 2D (Advanced)",
+    "mxSlider": "Slider Int (0~100)",
+    "mxSliderSmall": "Slider Int (0~10)",
+    "mxSliderFloat": "Slider Float (0~10)",
+    "mxSliderFloatSmall": "Slider Float (0~1)",
+    "mxSlider2D": "Slider 2D (1024*1024)",
+    "mxSlider2DA": "Slider 2D (3072*3072)",
 }
