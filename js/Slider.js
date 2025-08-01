@@ -192,7 +192,7 @@ app.registerExtension(
                     this.mxSlider = new MXSlider(this);
                     this.properties.max = 10;
                     this.onPropertyChanged("max");
-                    this.properties.value = 5;
+                    this.properties.value = 2;
                     this.onPropertyChanged("value");
                 }
             }
@@ -212,11 +212,11 @@ app.registerExtension(
                     this.mxSlider = new MXSlider(this);
                     this.properties.max = 10;
                     this.onPropertyChanged("max");
-                    this.properties.value = 5.0;
+                    this.properties.value = 2.0;
                     this.onPropertyChanged("value");
                     this.properties.step = 0.1;
                     this.onPropertyChanged("step");
-                    this.properties.decimals = 2;
+                    this.properties.decimals = 1;
                     this.onPropertyChanged("decimals");
                 }
             }

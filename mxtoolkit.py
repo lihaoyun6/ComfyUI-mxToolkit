@@ -78,8 +78,8 @@ class mxSliderSmall:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "Xi": ("INT", {"default": 20, "min": -4294967296, "max": 4294967296}),
-                "Xf": ("FLOAT", {"default": 20, "min": -4294967296, "max": 4294967296}),
+                "Xi": ("INT", {"default": 2, "min": -4294967296, "max": 4294967296}),
+                "Xf": ("FLOAT", {"default": 2, "min": -4294967296, "max": 4294967296}),
                 "isfloatX": ("INT", {"default": 0, "min": 0, "max": 1}),
             },
         }
@@ -102,9 +102,9 @@ class mxSliderFloat:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "Xi": ("INT", {"default": 20, "min": -4294967296, "max": 4294967296}),
-                "Xf": ("FLOAT", {"default": 20, "min": -4294967296, "max": 4294967296}),
-                "isfloatX": ("INT", {"default": 0, "min": 0, "max": 1}),
+                "Xi": ("INT", {"default": 2, "min": -4294967296, "max": 4294967296}),
+                "Xf": ("FLOAT", {"default": 2, "min": -4294967296, "max": 4294967296}),
+                "isfloatX": ("INT", {"default": 1, "min": 0, "max": 1}),
             },
         }
     
@@ -126,9 +126,9 @@ class mxSliderFloatSmall:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "Xi": ("INT", {"default": 20, "min": -4294967296, "max": 4294967296}),
-                "Xf": ("FLOAT", {"default": 20, "min": -4294967296, "max": 4294967296}),
-                "isfloatX": ("INT", {"default": 0, "min": 0, "max": 1}),
+                "Xi": ("INT", {"default": 0, "min": -4294967296, "max": 4294967296}),
+                "Xf": ("FLOAT", {"default": 0.5, "min": -4294967296, "max": 4294967296}),
+                "isfloatX": ("INT", {"default": 1, "min": 0, "max": 1}),
             },
         }
     
@@ -181,10 +181,10 @@ class mxSlider2DA:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "Xi": ("INT", {"default": 512, "min": -4294967296, "max": 4294967296}),
-                "Xf": ("FLOAT", {"default": 512, "min": -4294967296, "max": 4294967296}),
-                "Yi": ("INT", {"default": 512, "min": -4294967296, "max": 4294967296}),
-                "Yf": ("FLOAT", {"default": 512, "min": -4294967296, "max": 4294967296}),
+                "Xi": ("INT", {"default": 1024, "min": -4294967296, "max": 4294967296}),
+                "Xf": ("FLOAT", {"default": 1024, "min": -4294967296, "max": 4294967296}),
+                "Yi": ("INT", {"default": 1024, "min": -4294967296, "max": 4294967296}),
+                "Yf": ("FLOAT", {"default": 1024, "min": -4294967296, "max": 4294967296}),
                 "isfloatX": ("INT", {"default": 0, "min": 0, "max": 1}),
                 "isfloatY": ("INT", {"default": 0, "min": 0, "max": 1}),
             },
