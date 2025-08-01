@@ -178,3 +178,47 @@ app.registerExtension(
         }
     }
 });
+
+app.registerExtension(
+{
+    name: "mxSliderSmall",
+    async beforeRegisterNodeDef(nodeType, nodeData, _app)
+    {
+        if (nodeData.name === "mxSliderSmall")
+            {
+                const onNodeCreated = nodeType.prototype.onNodeCreated;
+                nodeType.prototype.onNodeCreated = function () {
+                    if (onNodeCreated) onNodeCreated.apply(this, []);
+                    this.mxSlider = new MXSlider(this);
+                    this.properties.max = 10;
+                    this.onPropertyChanged("max");
+                    this.properties.value = 5;
+                    this.onPropertyChanged("value");
+                }
+            }
+    }
+});
+
+app.registerExtension(
+{
+    name: "mxSliderFloat",
+    async beforeRegisterNodeDef(nodeType, nodeData, _app)
+    {
+        if (nodeData.name === "mxSliderFloat")
+            {
+                const onNodeCreated = nodeType.prototype.onNodeCreated;
+                nodeType.prototype.onNodeCreated = function () {
+                    if (onNodeCreated) onNodeCreated.apply(this, []);
+                    this.mxSlider = new MXSlider(this);
+                    this.properties.max = 1;
+                    this.onPropertyChanged("max");
+                    this.properties.value = 0.5;
+                    this.onPropertyChanged("value");
+                    this.properties.step = 0.05;
+                    this.onPropertyChanged("step");
+                    this.properties.decimals = 2;
+                    this.onPropertyChanged("decimals");
+                }
+            }
+    }
+});

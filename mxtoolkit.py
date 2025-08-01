@@ -73,7 +73,86 @@ class mxSlider:
             out = Xi
         return (out,)
 
+class mxSliderSmall:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "Xi": ("INT", {"default": 20, "min": -4294967296, "max": 4294967296}),
+                "Xf": ("FLOAT", {"default": 20, "min": -4294967296, "max": 4294967296}),
+                "isfloatX": ("INT", {"default": 0, "min": 0, "max": 1}),
+            },
+        }
+    
+    RETURN_TYPES = (any,)
+    RETURN_NAMES = ("X",)
+    
+    FUNCTION = "main"
+    CATEGORY = 'utils/mxToolkit'
+    
+    def main(self, Xi, Xf, isfloatX):
+        if isfloatX > 0:
+            out = Xf
+        else:
+            out = Xi
+        return (out,)
+
+class mxSliderFloat:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "Xi": ("INT", {"default": 20, "min": -4294967296, "max": 4294967296}),
+                "Xf": ("FLOAT", {"default": 20, "min": -4294967296, "max": 4294967296}),
+                "isfloatX": ("INT", {"default": 0, "min": 0, "max": 1}),
+            },
+        }
+    
+    RETURN_TYPES = (any,)
+    RETURN_NAMES = ("X",)
+    
+    FUNCTION = "main"
+    CATEGORY = 'utils/mxToolkit'
+    
+    def main(self, Xi, Xf, isfloatX):
+        if isfloatX > 0:
+            out = Xf
+        else:
+            out = Xi
+        return (out,)
+
 class mxSlider2D:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "Xi": ("INT", {"default": 512, "min": -4294967296, "max": 4294967296}),
+                "Xf": ("FLOAT", {"default": 512, "min": -4294967296, "max": 4294967296}),
+                "Yi": ("INT", {"default": 512, "min": -4294967296, "max": 4294967296}),
+                "Yf": ("FLOAT", {"default": 512, "min": -4294967296, "max": 4294967296}),
+                "isfloatX": ("INT", {"default": 0, "min": 0, "max": 1}),
+                "isfloatY": ("INT", {"default": 0, "min": 0, "max": 1}),
+            },
+        }
+
+    RETURN_TYPES = (any, any,)
+    RETURN_NAMES = ("X","Y",)
+
+    FUNCTION = "main"
+    CATEGORY = 'utils/mxToolkit'
+
+    def main(self, Xi, Xf, isfloatX, Yi, Yf, isfloatY):
+        if isfloatX > 0:
+            outX = Xf
+        else:
+            outX = Xi
+        if isfloatY > 0:
+            outY = Yf
+        else:
+            outY = Yi
+        return (outX, outY,)
+
+class mxSlider2DA:
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -109,12 +188,18 @@ NODE_CLASS_MAPPINGS = {
     "mxSeed": mxSeed,
     "mxStop": mxStop,
     "mxSlider": mxSlider,
+    "mxSliderSmall": mxSliderSmall,
+    "mxSliderFloat": mxSliderFloat,
     "mxSlider2D": mxSlider2D,
+    "mxSlider2DA": mxSlider2DA,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "mxSeed": "Seed",
     "mxStop": "Stop",
     "mxSlider": "Slider",
+    "mxSliderSmall": "Slider (Small)",
+    "mxSliderFloat": "Slider (Float)",
     "mxSlider2D": "Slider 2D",
+    "mxSlider2DA": "Slider 2D (Advanced)",
 }

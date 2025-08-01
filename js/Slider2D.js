@@ -8,7 +8,7 @@ class MXSlider2D
         this.node = node;
         this.node.properties = { valueX:512, valueY:512, minX:0, minY:0, maxX:1024, maxY:1024, stepX:128, stepY:128, decimalsX:0, decimalsY:0, snap: true, dots: true, frame: true, frameAlert:0 };
         this.node.intpos = { x:0.5, y:0.5 };
-        this.node.size = [210, 210];
+        this.node.size = [300, 300];
         const fontsize = LiteGraph.NODE_SUBTEXT_SIZE;
         const shX = (this.node.slot_start_y || 0)+fontsize*1.5;
         const shY = shX + LiteGraph.NODE_SLOT_HEIGHT;
@@ -97,6 +97,12 @@ class MXSlider2D
         {
             this.configured = true;
             if ( this.flags.collapsed ) return false;
+            
+            const drawWidth = this.size[0] - shiftLeft - shiftRight;
+            const drawHeight = this.size[1] - shiftLeft * 2;
+            const squareSize = Math.min(drawWidth, drawHeight);
+            this.size[0] = squareSize + shiftLeft + shiftRight;
+            this.size[1] = squareSize + shiftLeft * 2;
 
             let dgtX = parseInt(this.properties.decimalsX);
             let dgtY = parseInt(this.properties.decimalsY);
@@ -266,6 +272,24 @@ app.registerExtension(
             nodeType.prototype.onNodeCreated = function () {
                 if (onNodeCreated) onNodeCreated.apply(this, []);
                 this.mxSlider2d = new MXSlider2D(this);
+            }
+        }
+    }
+});
+
+app.registerExtension(
+{
+    name: "mxSlider2DA",
+    async beforeRegisterNodeDef(nodeType, nodeData, _app)
+    {
+        if (nodeData.name === "mxSlider2DA")
+        {
+            const onNodeCreated = nodeType.prototype.onNodeCreated;
+            nodeType.prototype.onNodeCreated = function () {
+                if (onNodeCreated) onNodeCreated.apply(this, []);
+                this.mxSlider2d = new MXSlider2D(this);
+                this.properties = { valueX:1024, valueY:1024, minX:0, minY:0, maxX:3072, maxY:3072, stepX:64, stepY:64, decimalsX:0, decimalsY:0, snap: true, dots: true, frame: true, frameAlert:0 };
+                this.onPropertyChanged("properties");
             }
         }
     }
