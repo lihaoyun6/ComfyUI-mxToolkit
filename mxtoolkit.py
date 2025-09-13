@@ -1,5 +1,6 @@
 # ComfyUI - mxToolkit - Max Smirnov 2024
 import nodes
+import random
 
 class AnyType(str):
     def __ne__(self, __value: object) -> bool:
