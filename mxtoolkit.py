@@ -313,6 +313,66 @@ class CSVRandomPicker:
         result = separator.join(selected_items)
         return (result,)
 
+class CSVRandomPickerAdv:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "csv_string": ("STRING", {
+                    "multiline": True,
+                    "default": "apple,banana,cat,dog"
+                }),
+                "min_count": ("INT", {
+                    "default": 1,
+                    "min": 1,
+                    "max": 1000
+                }),
+                "max_count": ("INT", {
+                    "default": 1,
+                    "min": 1,
+                    "max": 1000
+                }),
+                "input_separator": ("STRING", {
+                    "default": ","
+                }),
+                "output_separator": ("STRING", {
+                    "default": ","
+                }),
+                "seed": ("INT", {
+                    "default": 0,
+                    "min": 0,
+                    "max": 1125899906842624
+                }),
+            }
+        }
+    
+    RETURN_TYPES = ("STRING",)
+    FUNCTION = "pick_random_items"
+    CATEGORY = "Custom/Utils"
+    
+    @classmethod
+    def IS_CHANGED(cls, *args, **kwargs):
+        return True
+    
+    def pick_random_items(self, csv_string, min_count, max_count, input_separator, output_separator, seed):
+        items = [item.strip() for item in csv_string.split(input_separator) if item.strip()]
+        if not items:
+            return ("",)
+        
+        if min_count > max_count:
+            raise RuntimeError('"max_count" must be greater than "min_count"!')
+        
+        _min_count = min(min_count, len(items))
+        _max_count = min(max_count, len(items))
+        actual_count =  random.randint(_min_count, _max_count)
+        
+        rng = random.Random()
+        rng.seed(seed)
+        
+        selected_items = rng.sample(items, actual_count)
+        result = output_separator.join(selected_items)
+        return (result,)
+
 NODE_CLASS_MAPPINGS = {
     "mxSeed": mxSeed,
     "mxStop": mxStop,
@@ -325,6 +385,7 @@ NODE_CLASS_MAPPINGS = {
     "StrFormat": StrFormat,
     "StrFormatAdv": StrFormatAdv,
     "CSVRandomPicker": CSVRandomPicker,
+    "CSVRandomPickerAdv": CSVRandomPickerAdv,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -339,4 +400,5 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "StrFormat": "String Format",
     "StrFormatAdv": "String Format (Advanced)",
     "CSVRandomPicker": "CSV RandomPicker",
+    "CSVRandomPickerAdv": "CSV RandomPicker (Advanced)",
 }
