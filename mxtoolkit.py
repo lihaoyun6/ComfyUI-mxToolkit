@@ -208,171 +208,6 @@ class mxSlider2DA:
             outY = Yi
         return (outX, outY,)
 
-class StrFormat:
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "format": ("STRING", {"default": "", "multiline": True}),
-                "value1": ("STRING", {"default": ""}),
-                "value2": ("STRING", {"default": ""}),
-                "value3": ("STRING", {"default": ""}),
-                "value4": ("STRING", {"default": ""}),
-                "value5": ("STRING", {"default": ""}),
-                "value6": ("STRING", {"default": ""}),
-            },
-        }
-    
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("string",)
-    FUNCTION = "main"
-    CATEGORY = 'utils/mxToolkit'
-    
-    def main(self, format, value1, value2, value3, value4, value5, value6):
-        return (format.format(value1, value2, value3, value4, value5, value6),)
-
-class StrFormatAdv:
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "format": ("STRING", {"default": "", "multiline": True}),
-                "value1": ("STRING", {"default": ""}),
-                "switch1": ("BOOLEAN", {"default": True}),
-                "value2": ("STRING", {"default": ""}),
-                "switch2": ("BOOLEAN", {"default": True}),
-                "value3": ("STRING", {"default": ""}),
-                "switch3": ("BOOLEAN", {"default": True}),
-                "value4": ("STRING", {"default": ""}),
-                "switch4": ("BOOLEAN", {"default": True}),
-                "value5": ("STRING", {"default": ""}),
-                "switch5": ("BOOLEAN", {"default": True}),
-                "value6": ("STRING", {"default": ""}),
-                "switch6": ("BOOLEAN", {"default": True}),
-            },
-        }
-    
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("string",)
-    FUNCTION = "main"
-    CATEGORY = 'utils/mxToolkit'
-    
-    def main(self, format, value1, switch1, value2, switch2, value3, switch3, value4, switch4, value5, switch5, value6, switch6):
-        v1 = value1 if switch1 else ""
-        v2 = value2 if switch2 else ""
-        v3 = value3 if switch3 else ""
-        v4 = value4 if switch4 else ""
-        v5 = value5 if switch5 else ""
-        v6 = value6 if switch6 else ""
-        return (format.format(v1, v2, v3, v4, v5, v6),)
-
-class CSVRandomPicker:
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "csv_string": ("STRING", {
-                    "multiline": True,
-                    "default": "apple,banana,cat,dog"
-                }),
-                "count": ("INT", {
-                    "default": 1,
-                    "min": 1,
-                    "max": 1000
-                }),
-                "separator": ("STRING", {
-                    "default": ","
-                }),
-                "seed": ("INT", {
-                    "default": 0,
-                    "min": 0,
-                    "max": 1125899906842624
-                }),
-            }
-        }
-    
-    RETURN_TYPES = ("STRING",)
-    FUNCTION = "pick_random_items"
-    CATEGORY = "Custom/Utils"
-    
-    @classmethod
-    def IS_CHANGED(cls, *args, **kwargs):
-        return True
-    
-    def pick_random_items(self, csv_string, count, separator, seed):
-        items = [item.strip() for item in csv_string.split(separator) if item.strip()]
-        if not items:
-            return ("",)
-        
-        actual_count = min(count, len(items))
-        
-        rng = random.Random()
-        rng.seed(seed)
-        
-        selected_items = rng.sample(items, actual_count)
-        result = separator.join(selected_items)
-        return (result,)
-
-class CSVRandomPickerAdv:
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "csv_string": ("STRING", {
-                    "multiline": True,
-                    "default": "apple,banana,cat,dog"
-                }),
-                "min_count": ("INT", {
-                    "default": 1,
-                    "min": 1,
-                    "max": 1000
-                }),
-                "max_count": ("INT", {
-                    "default": 1,
-                    "min": 1,
-                    "max": 1000
-                }),
-                "input_separator": ("STRING", {
-                    "default": ","
-                }),
-                "output_separator": ("STRING", {
-                    "default": ","
-                }),
-                "seed": ("INT", {
-                    "default": 0,
-                    "min": 0,
-                    "max": 1125899906842624
-                }),
-            }
-        }
-    
-    RETURN_TYPES = ("STRING",)
-    FUNCTION = "pick_random_items"
-    CATEGORY = "Custom/Utils"
-    
-    @classmethod
-    def IS_CHANGED(cls, *args, **kwargs):
-        return True
-    
-    def pick_random_items(self, csv_string, min_count, max_count, input_separator, output_separator, seed):
-        items = [item.strip() for item in csv_string.split(input_separator) if item.strip()]
-        if not items:
-            return ("",)
-        
-        if min_count > max_count:
-            raise RuntimeError('"max_count" must be greater than "min_count"!')
-        
-        _min_count = min(min_count, len(items))
-        _max_count = min(max_count, len(items))
-        actual_count =  random.randint(_min_count, _max_count)
-        
-        rng = random.Random()
-        rng.seed(seed)
-        
-        selected_items = rng.sample(items, actual_count)
-        result = output_separator.join(selected_items)
-        return (result,)
-
 NODE_CLASS_MAPPINGS = {
     "mxSeed": mxSeed,
     "mxStop": mxStop,
@@ -381,11 +216,7 @@ NODE_CLASS_MAPPINGS = {
     "mxSliderFloat": mxSliderFloat,
     "mxSliderFloatSmall": mxSliderFloatSmall,
     "mxSlider2D": mxSlider2D,
-    "mxSlider2DA": mxSlider2DA,
-    "StrFormat": StrFormat,
-    "StrFormatAdv": StrFormatAdv,
-    "CSVRandomPicker": CSVRandomPicker,
-    "CSVRandomPickerAdv": CSVRandomPickerAdv,
+    "mxSlider2DA": mxSlider2DA
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -396,9 +227,5 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "mxSliderFloat": "Slider Float (0~10)",
     "mxSliderFloatSmall": "Slider Float (0~1)",
     "mxSlider2D": "Slider 2D (1024*1024)",
-    "mxSlider2DA": "Slider 2D (3072*3072)",
-    "StrFormat": "String Format",
-    "StrFormatAdv": "String Format (Advanced)",
-    "CSVRandomPicker": "CSV RandomPicker",
-    "CSVRandomPickerAdv": "CSV RandomPicker (Advanced)",
+    "mxSlider2DA": "Slider 2D (3072*3072)"
 }
